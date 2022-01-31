@@ -9,9 +9,7 @@ import store from "./utils/store.js";
 ReactDOM.render(
 	<React.StrictMode>
 		<App />
-		<Provider store={store}>
-			<App />
-		</Provider>
+		<Provider store={store}></Provider>
 	</React.StrictMode>,
 	document.getElementById("root")
 );
