@@ -1,14 +1,16 @@
 import React, { useEffect } from "react";
 import { useQuery } from "@apollo/client";
-import { useStoreContext } from "../../utils/GlobalState";
 import ProductItem from "../ProductItem";
 import { QUERY_PRODUCTS } from "../../utils/queries";
 import { UPDATE_PRODUCTS } from "../../utils/actions";
 import spinner from "../../assets/spinner.gif";
 import { idbPromise } from "../../utils/helpers";
+import { useDispatch, useSelector } from "react-redux";
 
-function ProductList({}) {
-	const [state, dispatch] = useStoreContext();
+function ProductList() {
+	const state = useSelector((state) => state);
+	const dispatch = useDispatch();
+
 	const { currentCategory } = state;
 	const { loading, data } = useQuery(QUERY_PRODUCTS);
 
@@ -36,7 +38,7 @@ function ProductList({}) {
 				});
 			});
 		}
-	}, [data, dispatch]);
+	}, [data, loading, dispatch]);
 
 	function filterProducts() {
 		if (!currentCategory) {
